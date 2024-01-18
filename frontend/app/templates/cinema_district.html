@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Internal of Frontend {% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="display-4 text-center">Almost at the end!<br> Find your District's Cinema!</h1>
+                <p class="lead text-center">Insert the District from Veneto that you like the most to get its list of Cinemas.</p>
+
+                <!-- Display for Function 1 -->
+                <form method="POST" action="{{ url_for('cinema_district_query' )}}">
+                    {{ form.csrf_token }}
+                    <div class="mb-3">
+                        {{ form.dis_name_cinema.label(class="form-label") }}
+                        {{ form.dis_name_cinema(class="form-control", placeholder="Enter a District from Veneto") }}
+                    </div>
+                    {{ form.submit(class="btn btn-primary") }}
+                </form>
+
+                <!-- Display the result here -->
+                <div id="resultContainer" class="mt-3">
+                    {% if cinema_dis %}
+                        <p class="lead">{{ cinema_dis }}</p>
+                    {% endif %}
+                    {% if error_message %}
+                        <p class="text-danger">{{ error_message }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
