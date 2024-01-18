@@ -202,6 +202,12 @@ def district_query():
 # Funzione 4
 @app.route('/file', methods=['GET', 'POST'])
 def download_file():
+    """
+    Render the download_file page.
+
+    Returns:
+        str: Rendered HTML content for the download_file page.
+    """
     districts = requests.post(f'{FASTAPI_BACKEND_HOST}/select_districts').json()
     form = MyForm1()
     form.set_choices(districts)
