@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %} Internal of Frontend {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="display-4 text-center">The last function, finally!</h1>
+            <p class="lead text-center">Choose the District, then the City, and in conclusion the Theater about which you want the information.</p>
+
+            <form action="{{ url_for('download_file') }}" method="post">
+                {{ form.hidden_tag() }}
+
+                <!-- Districts Dropdown -->
+                <div class="mb-3">
+                    {{ form.dropdown_districts.label(class="form-label") }}
+                    <select name="dropdown_districts" class="form-select">
+                        {% for district_value, district_label in form.dropdown_districts.choices %}
+                            <option value="{{ district_value }}">{{ district_label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Cities Dropdown -->
+                {% if form2 %}
+                    <div class="mb-3">
+                        {{ form2.dropdown_cities.label(class="form-label") }}
+                        <select name="dropdown_cities" class="form-select">
+                            {% for city_value, city_label in form2.dropdown_cities.choices %}
+                                <option value="{{ city_value }}">{{ city_label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endif %}
+
+                <!-- Theaters Dropdown -->
+                {% if form3 %}
+                    <div class="mb-3">
+                        {{ form3.dropdown_theaters.label(class="form-label") }}
+                        <select name="dropdown_theaters" class="form-select">
+                            {% for theater_value, theater_label in form3.dropdown_theaters.choices %}
+                                <option value="{{ theater_value }}">{{ theater_label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    {{ form.reset(class="btn btn-secondary me-2") }}
+                    {{ active_form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

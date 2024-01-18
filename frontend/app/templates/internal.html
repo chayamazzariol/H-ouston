@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Internal of Frontend {% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Good morning again,<br> Find your District's Theater!</h1>
+            <p class="lead">Insert the District from Veneto that you like the most to get its list of Theaters.</p>
+
+            <!-- Display for Function 1 -->
+            <form method="POST" action="{{ url_for('internal' )}}" class="d-flex justify-content-center align-items-center flex-column">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {{ form.district_name.label }}
+                    {{ form.district_name(class="form-control", placeholder="Choose a District") }}
+                </div>
+                {{ form.submit(class="btn btn-primary mt-3") }}
+            </form>
+
+            <!-- Display the result here -->
+            <div id="resultContainer" class="mt-3">
+                {% if district_theaters %}
+                    <p class="lead">{{ district_theaters }}</p>
+                {% endif %}
+                {% if error_message %}
+                    <p class="text-danger">{{ error_message }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
